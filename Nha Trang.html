@@ -1,0 +1,1243 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Khám Phá Nha Trang</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;600&display=swap');
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Montserrat', sans-serif; }
+    :root {
+        --bg-color: #5abee7;
+        --text-color: #F5F6F5;
+        --accent-color: #FF9A8B;
+        --card-bg: #2c88af;
+        --nav-bg: rgba(42, 106, 158, 0.95);
+    }
+    body.dark-mode {
+        --bg-color: #1A3552;
+        --text-color: #FFFFFF;
+        --accent-color: #FCE8B2;
+        --card-bg: rgba(30, 70, 120, 0.85);
+        --nav-bg: rgba(20, 50, 80, 0.95);
+    }
+    body { 
+        line-height: 1.6; 
+        background: linear-gradient(135deg, var(--bg-color), #A8D5E2);
+        color: var(--text-color); 
+        overflow-x: hidden; 
+        scroll-behavior: smooth;
+    }
+    #progress-bar { 
+        position: fixed; 
+        top: 0; 
+        left: 0; 
+        width: 0; 
+        height: 4px; 
+        background: linear-gradient(to right, var(--accent-color), #2c2309);
+        z-index: 2000; 
+        transition: width 0.3s ease; 
+    }
+    header { 
+        position: relative; 
+        height: 100vh; 
+        display: flex; 
+        flex-direction: column;
+        justify-content: center; 
+        align-items: center; 
+        text-align: center; 
+        overflow: hidden; 
+    }
+    header::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(to bottom, rgba(42, 106, 158, 0.3), rgba(42, 106, 158, 0.7));
+        z-index: 1;
+    }
+    header img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: 0;
+        transition: transform 0.5s ease-out;
+    }
+    header h1 { 
+        position: relative; 
+        z-index: 2; 
+        font-family: 'Playfair Display', serif; 
+        font-size: clamp(2.5rem, 5vw, 4.5rem); 
+        color: #FCE8B2;
+        text-shadow: 3px 3px 15px rgba(0, 0, 0, 0.6); 
+        opacity: 0;
+        transform: translateY(20px);
+        animation: fadeInDown 1.5s ease-out forwards;
+    }
+    header .scroll-down {
+        position: absolute;
+        bottom: 40px;
+        z-index: 2;
+        color: #FCE8B2;
+        font-size: 1.5rem;
+        animation: bounce 2s infinite;
+        opacity: 0;
+        animation-delay: 1s;
+        animation-fill-mode: forwards;
+    }
+    .wave { 
+        position: absolute; 
+        bottom: -1px; 
+        width: 100%; 
+        height: 120px; 
+        background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/85486/wave.svg'); 
+        background-size: 1000px 120px; 
+        animation: wave 8s linear infinite; 
+        z-index: 2; 
+    }
+    nav { 
+        background: var(--nav-bg);
+        padding: 1rem; 
+        position: sticky; 
+        top: 0; 
+        z-index: 1000; 
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        backdrop-filter: blur(10px);
+    }
+    .nav-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
+        position: relative;
+    }
+    nav a { 
+        color: #FCE8B2; 
+        text-decoration: none; 
+        padding: 0.8rem 1.5rem; 
+        font-weight: 600; 
+        position: relative; 
+        transition: all 0.3s ease; 
+    }
+    nav a::after { 
+        content: ''; 
+        position: absolute; 
+        width: 0; 
+        height: 2px; 
+        bottom: 0; 
+        left: 50%; 
+        background: var(--accent-color);
+        transition: all 0.3s ease; 
+    }
+    nav a:hover, nav a.active { 
+        color: var(--accent-color); 
+        transform: translateY(-2px); 
+    }
+    nav a:hover::after, nav a.active::after { 
+        width: 100%; 
+        left: 0; 
+    }
+    .dark-mode-toggle {
+        position: absolute;
+        right: 20px;
+        background: var(--accent-color);
+        border: none;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        color: #2A6A9E;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+    }
+    .dark-mode-toggle:hover {
+        transform: scale(1.1);
+    }
+    #toc {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 250px;
+        height: 100vh;
+        background: var(--nav-bg);
+        box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
+        z-index: 1500;
+        padding: 1rem;
+        transform: translateX(0);
+        transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        display: flex;
+        flex-direction: column;
+    }
+    #toc.collapsed {
+        transform: translateX(-220px);
+    }
+    #toc h3 {
+        color: #FCE8B2;
+        font-family: 'Playfair Display', serif;
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+        text-align: center;
+        opacity: 0;
+        animation: fadeIn 0.5s ease forwards;
+    }
+    #toc ul {
+        list-style: none;
+        flex: 1;
+        overflow-y: auto;
+    }
+    #toc li {
+        margin-bottom: 0.8rem;
+        opacity: 0;
+        transform: translateX(-10px);
+        animation: slideIn 0.5s ease forwards;
+    }
+    #toc li:nth-child(1) { animation-delay: 0.1s; }
+    #toc li:nth-child(2) { animation-delay: 0.2s; }
+    #toc li:nth-child(3) { animation-delay: 0.3s; }
+    #toc li:nth-child(4) { animation-delay: 0.4s; }
+    #toc li:nth-child(5) { animation-delay: 0.5s; }
+    #toc li:nth-child(6) { animation-delay: 0.6s; }
+    #toc li:nth-child(7) { animation-delay: 0.7s; }
+    #toc a {
+        color: var(--text-color);
+        text-decoration: none;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        display: block;
+        padding: 0.5rem 1rem;
+        border-radius: 5px;
+    }
+    #toc a:hover, #toc a.active {
+        background: var(--accent-color);
+        color: #2A6A9E;
+        transform: translateX(5px);
+    }
+    #toc-toggle {
+        position: absolute;
+        top: 20px;
+        right: -40px;
+        background: linear-gradient(45deg, var(--accent-color), #FCE8B2);
+        border: none;
+        border-radius: 0 50% 50% 0;
+        width: 40px;
+        height: 40px;
+        color: #2A6A9E;
+        font-size: 1.2rem;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
+        transition: all 0.3s ease;
+    }
+    #toc-toggle:hover {
+        transform: scale(1.1);
+    }
+    .container { 
+        width: 90%; 
+        max-width: 1300px; 
+        margin: 0 auto; 
+        padding: 5rem 0; 
+        margin-left: 270px;
+    }
+    .section { 
+        padding: 4rem; 
+        background: var(--card-bg);
+        border-radius: 25px; 
+        margin-bottom: 4rem; 
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2); 
+        opacity: 0; 
+        transform: translateY(30px);
+        transition: opacity 0.8s ease-out, transform 0.8s ease-out, box-shadow 0.3s ease;
+        display: grid; 
+        grid-template-columns: 1fr 1fr; 
+        gap: 2rem; 
+        align-items: center; 
+        min-height: 400px;
+    }
+    .section.fade-in {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    .section:hover {
+        box-shadow: 0 20px 50px rgba(168, 213, 226, 0.5);
+        border: 2px solid var(--accent-color);
+        transform: scale(1.02);
+    }
+    .section.full-width { 
+        grid-template-columns: 1fr; 
+        min-height: 600px;
+    }
+    .section h2 { 
+        margin-bottom: 2rem; 
+        font-family: 'Playfair Display', serif; 
+        font-size: clamp(2rem, 4vw, 3rem); 
+        color: #FCE8B2; 
+        position: relative; 
+        grid-column: 1 / -1; 
+        text-align: center; 
+        background: linear-gradient(45deg, var(--accent-color), #FCE8B2);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        animation: gradientShift 3s infinite alternate;
+    }
+    .section h2::after { 
+        content: ''; 
+        width: 60px; 
+        height: 4px; 
+        background: linear-gradient(to right, var(--accent-color), #FCE8B2); 
+        position: absolute; 
+        bottom: -15px; 
+        left: 50%; 
+        transform: translateX(-50%); 
+    }
+    .section p { 
+        font-size: 1.1rem; 
+        line-height: 1.9; 
+        padding: 0 1rem; 
+    }
+    .section img, .card img { 
+        width: 100%; 
+        border-radius: 15px; 
+        border: 3px solid var(--accent-color); 
+        transition: all 0.5s ease; 
+        object-fit: cover;
+        cursor: pointer;
+    }
+    .section img:hover, .card img:hover { 
+        transform: scale(1.03); 
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3); 
+        border-color: #FCE8B2;
+    }
+    .card-container { 
+        display: grid; 
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+        gap: 2rem; 
+        padding: 1rem; 
+    }
+    .card { 
+        background: rgba(255, 255, 255, 0.15); 
+        border-radius: 20px; 
+        padding: 1.5rem; 
+        text-align: center; 
+        transition: all 0.4s ease; 
+        backdrop-filter: blur(5px);
+        position: relative;
+        overflow: hidden;
+        opacity: 0;
+        transform: translateY(20px);
+        animation: fadeInUp 0.5s ease forwards;
+    }
+    .card:nth-child(1) { animation-delay: 0.1s; }
+    .card:nth-child(2) { animation-delay: 0.2s; }
+    .card:nth-child(3) { animation-delay: 0.3s; }
+    .card:hover { 
+        transform: translateY(-15px) scale(1.05);
+        background: rgba(255, 255, 255, 0.25); 
+        box-shadow: 0 10px 25px rgba(168, 213, 226, 0.5);
+    }
+    .card::before { 
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        background: radial-gradient(circle, rgba(255, 154, 139, 0.5), transparent);
+        transition: all 0.5s ease;
+        transform: translate(-50%, -50%);
+        z-index: 0;
+        opacity: 0;
+    }
+    .card:hover::before {
+        width: 300px;
+        height: 300px;
+        opacity: 1;
+    }
+    .card img, .card h3, .card p { 
+        position: relative; 
+        z-index: 1; 
+    }
+    .card img { 
+        width: 100%; 
+        height: 180px; 
+        object-fit: cover; 
+        border-radius: 12px; 
+        margin-bottom: 1rem; 
+    }
+    .card h3 { 
+        color: #FCE8B2; 
+        font-family: 'Playfair Display', serif; 
+        font-size: 1.5rem; 
+        margin-bottom: 0.8rem; 
+    }
+    .rating {
+        margin: 0.5rem 0;
+        unicode-bidi: bidi-override;
+        direction: rtl;
+    }
+    .star {
+        cursor: pointer;
+        color: #ccc;
+        font-size: 1.2rem;
+    }
+    .star:hover, .star.active {
+        color: var(--accent-color);
+    }
+    .comment-box {
+        width: 100%;
+        margin-top: 0.5rem;
+        padding: 0.5rem;
+        border-radius: 5px;
+        background: rgba(255, 255, 255, 0.9);
+        color: #2A6A9E;
+    }
+    .submit-comment {
+        background: var(--accent-color);
+        border: none;
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        color: var(--text-color);
+        cursor: pointer;
+        margin-top: 0.5rem;
+    }
+    .filter-container {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        margin-bottom: 2rem;
+    }
+    .filter-btn {
+        padding: 0.5rem 1rem;
+        background: var(--accent-color);
+        border: none;
+        border-radius: 20px;
+        color: var(--text-color);
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+    .filter-btn.active, .filter-btn:hover {
+        background: #FCE8B2;
+        color: #2A6A9E;
+    }
+    .cta { 
+        display: inline-block; 
+        margin-top: 1.5rem; 
+        padding: 0.8rem 2rem; 
+        background: linear-gradient(45deg, var(--accent-color), #FCE8B2); 
+        color: #2A6A9E;
+        text-decoration: none; 
+        border-radius: 50px; 
+        font-weight: 600; 
+        transition: all 0.3s ease; 
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        position: relative;
+        overflow: hidden;
+    }
+    .cta::before { 
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        background: rgba(255, 255, 255, 0.4);
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+        transition: width 0.6s ease, height 0.6s ease;
+        z-index: 0;
+    }
+    .cta:active::before {
+        width: 300px;
+        height: 300px;
+    }
+    .cta span { 
+        position: relative;
+        z-index: 1;
+    }
+    .cta:hover { 
+        transform: translateY(-5px); 
+        box-shadow: 0 8px 20px rgba(168, 213, 226, 0.5); 
+        background: linear-gradient(45deg, #FCE8B2, var(--accent-color));
+    }
+    footer { 
+        background: var(--nav-bg); 
+        color: #FCE8B2; 
+        text-align: center; 
+        padding: 2rem; 
+        font-size: 1.1rem; 
+        box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.2);
+        position: relative;
+    }
+    footer::before {
+        content: '';
+        position: absolute;
+        top: -50px;
+        left: 0;
+        width: 100%;
+        height: 50px;
+        background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/85486/wave.svg') bottom;
+        background-size: 1000px 50px;
+        transform: scaleY(-1);
+    }
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 3000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.9);
+        justify-content: center;
+        align-items: center;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+    .modal.active {
+        display: flex;
+        opacity: 1;
+    }
+    .modal-content {
+        max-width: 90%;
+        max-height: 90vh;
+        transform: scale(0.8);
+        transition: transform 0.3s ease;
+    }
+    .modal.active .modal-content {
+        transform: scale(1);
+    }
+    .modal-content:hover {
+        transform: scale(1.05);
+    }
+    .close {
+        position: absolute;
+        top: 20px;
+        right: 35px;
+        color: #FCE8B2;
+        font-size: 40px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: color 0.3s ease;
+    }
+    .close:hover {
+        color: var(--accent-color);
+    }
+    .chat-box {
+        position: fixed;
+        bottom: 80px;
+        right: 20px;
+        width: 320px;
+        background: var(--nav-bg);
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        z-index: 2000;
+        overflow: hidden;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.4s ease, transform 0.4s ease;
+        display: none;
+    }
+    .chat-box.active {
+        display: block;
+        opacity: 1;
+        transform: translateY(0);
+    }
+    .chat-box.closed {
+        width: 60px;
+        height: 60px;
+        opacity: 1;
+    }
+    .chat-header {
+        background: linear-gradient(45deg, var(--accent-color), #FCE8B2);
+        color: #2A6A9E;
+        padding: 10px 15px;
+        font-weight: 600;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-radius: 15px 15px 0 0;
+    }
+    .chat-toggle {
+        background: none;
+        border: none;
+        color: #2A6A9E;
+        font-size: 1.2rem;
+        cursor: pointer;
+        transition: transform 0.3s ease;
+    }
+    .chat-toggle:hover {
+        transform: scale(1.1);
+    }
+    .chat-body {
+        display: flex;
+        flex-direction: column;
+        height: 400px;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(5px);
+    }
+    .chat-messages {
+        flex: 1;
+        padding: 15px;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+    .message {
+        max-width: 80%;
+        padding: 10px 15px;
+        border-radius: 10px;
+        font-size: 0.95rem;
+        opacity: 0;
+        transform: translateY(10px);
+        animation: fadeInUp 0.3s ease forwards;
+    }
+    .bot-message {
+        background: #FCE8B2;
+        color: #2A6A9E;
+        align-self: flex-start;
+    }
+    .user-message {
+        background: var(--accent-color);
+        color: var(--text-color);
+        align-self: flex-end;
+    }
+    .chat-input {
+        display: flex;
+        padding: 10px;
+        border-top: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    .chat-input input {
+        flex: 1;
+        padding: 8px;
+        border: none;
+        border-radius: 20px;
+        background: rgba(255, 255, 255, 0.9);
+        color: #2A6A9E;
+        outline: none;
+        margin-right: 10px;
+    }
+    .chat-input button {
+        background: linear-gradient(45deg, var(--accent-color), #FCE8B2);
+        border: none;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        color: #2A6A9E;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+    .chat-input button:hover {
+        transform: scale(1.1);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+    .chat-icon {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        background: linear-gradient(45deg, var(--accent-color), #FCE8B2);
+        border: none;
+        border-radius: 50%;
+        width: 60px;
+        height: 60px;
+        color: #2A6A9E;
+        font-size: 1.8rem;
+        cursor: pointer;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        transition: all 0.3s ease;
+    }
+    .chat-icon:hover {
+        transform: scale(1.1);
+    }
+    .chat-box.closed .chat-header,
+    .chat-box.closed .chat-body {
+        display: none;
+    }
+    .chat-box.closed .chat-icon {
+        display: flex;
+    }
+    .chat-open-btn {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: linear-gradient(45deg, var(--accent-color), #FCE8B2);
+        border: none;
+        border-radius: 50%;
+        width: 60px;
+        height: 60px;
+        color: #2A6A9E;
+        font-size: 1.8rem;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        transition: all 0.3s ease;
+        z-index: 1999;
+    }
+    .chat-open-btn.hidden {
+        display: none;
+    }
+    .chat-open-btn:hover {
+        transform: scale(1.1);
+    }
+    body.dark-mode header h1 {
+        color: #FCE8B2;
+    }
+    body.dark-mode .section h2 {
+        color: #FCE8B2;
+        background: linear-gradient(45deg, #FCE8B2, #FF9A8B);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+    }
+    body.dark-mode .section p {
+        color: #D1E8FF;
+    }
+    body.dark-mode nav a {
+        color: #FCE8B2;
+    }
+    body.dark-mode nav a:hover, 
+    body.dark-mode nav a.active {
+        color: #FF9A8B;
+    }
+    body.dark-mode #toc h3 {
+        color: #FCE8B2;
+    }
+    body.dark-mode #toc a {
+        color: #D1E8FF;
+    }
+    body.dark-mode #toc a:hover, 
+    body.dark-mode #toc a.active {
+        color: #2A6A9E;
+    }
+    body.dark-mode .card h3 {
+        color: #FCE8B2;
+    }
+    body.dark-mode .card p {
+        color: #D1E8FF;
+    }
+    body.dark-mode footer p {
+        color: #FCE8B2;
+    }
+    body.dark-mode .chat-header {
+        color: #2A6A9E;
+    }
+    body.dark-mode .bot-message {
+        color: #2A6A9E;
+    }
+    body.dark-mode .user-message {
+        color: #FFFFFF;
+    }
+    body.dark-mode .comment-box {
+        color: #2A6A9E;
+    }
+    body.dark-mode .submit-comment {
+        color: #FFFFFF;
+    }
+    body.dark-mode .cta {
+        color: #2A6A9E;
+    }
+    body.dark-mode .filter-btn {
+        color: #FFFFFF;
+    }
+    body.dark-mode .filter-btn.active, 
+    body.dark-mode .filter-btn:hover {
+        color: #2A6A9E;
+    }
+    @keyframes fadeInDown { 
+        0% { opacity: 0; transform: translateY(-30px); } 
+        100% { opacity: 1; transform: translateY(0); } 
+    }
+    @keyframes wave { 
+        0% { background-position-x: 0; } 
+        100% { background-position-x: 1000px; } 
+    }
+    @keyframes bounce {
+        0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+        40% { transform: translateY(-15px); }
+        60% { transform: translateY(-7px); }
+    }
+    @keyframes gradientShift {
+        0% { background-position: 0% 50%; }
+        100% { background-position: 100% 50%; }
+    }
+    @keyframes fadeIn {
+        0% { opacity: 0; }
+        100% { opacity: 1; }
+    }
+    @keyframes slideIn {
+        0% { opacity: 0; transform: translateX(-10px); }
+        100% { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes fadeInUp {
+        0% { opacity: 0; transform: translateY(20px); }
+        100% { opacity: 1; transform: translateY(0); }
+    }
+    @media (max-width: 768px) {
+        .section { 
+            grid-template-columns: 1fr; 
+            padding: 2rem; 
+            min-height: 500px;
+        }
+        nav .nav-container { 
+            flex-direction: column; 
+            gap: 1rem; 
+        }
+        header h1 { font-size: 2.5rem; }
+        .card-container { grid-template-columns: 1fr; }
+        .chat-box { 
+            width: 280px; 
+            bottom: 70px;
+        }
+        .chat-open-btn { bottom: 15px; }
+        #toc {
+            width: 200px;
+            transform: translateX(-170px);
+        }
+        #toc.collapsed {
+            transform: translateX(-170px);
+        }
+        .container {
+            margin-left: 30px;
+        }
+        .filter-container {
+            flex-wrap: wrap;
+        }
+    }
+</style>
+</head>
+<body>
+    <div id="progress-bar"></div>
+    <header>
+        <img src="https://toigingiuvedep.vn/wp-content/uploads/2021/05/dao-yen-hon-noi-o-nha-trang.jpg" alt="Nha Trang buổi chiều tối">
+        <h1><span class="typing">Khám Phá Thành Phố Nha Trang</span></h1>
+        <a href="#about" class="scroll-down"><i class="fas fa-chevron-down"></i></a>
+        <div class="wave"></div>
+    </header>
+    <nav>
+        <div class="nav-container">
+            <a href="#about">Giới thiệu</a>
+            <a href="#history">Lịch sử</a>
+            <a href="#tourism">Du lịch</a>
+            <a href="#culture">Văn hóa</a>
+            <a href="#destinations">Điểm đến</a>
+            <a href="#cuisine">Ẩm thực</a>
+            <a href="#places">Địa điểm du lịch</a>
+            <button class="dark-mode-toggle"><i class="fas fa-moon"></i></button>
+        </div>
+    </nav>
+    <div id="toc">
+        <h3>Mục lục</h3>
+        <ul id="toc-list"></ul>
+        <button id="toc-toggle"><i class="fas fa-chevron-right"></i></button>
+    </div>
+
+    <div class="container">
+        <div class="section" id="about">
+            <h2>Giới thiệu về Nha Trang</h2>
+            <p>Nha Trang không chỉ quyến rũ bởi cảnh đẹp mà còn mang trong mình bề dày lịch sử. Từng là một phần của vương quốc Chăm Pa cổ, thành phố vẫn lưu giữ dấu ấn văn hóa tại Tháp Bà Ponagar. Trải qua nhiều giai đoạn phát triển, Nha Trang dần trở thành một trung tâm du lịch và kinh tế quan trọng của miền Trung. Với sự giao thoa giữa truyền thống và hiện đại, nơi đây vừa mang nét cổ kính của nền văn minh Chăm, vừa là đô thị biển sôi động, thu hút du khách khắp nơi!</p>
+            <img src="https://toigingiuvedep.vn/wp-content/uploads/2021/05/hinh-anh-nha-trang-vao-buoi-chieu-toi.jpg" alt="Thành phố Nha Trang" loading="lazy">
+            <a href="#" class="cta"><span>Khám phá ngay</span></a>
+        </div>
+        <div class="section" id="history">
+            <h2>Lịch sử Nha Trang</h2>
+            <img src="https://bomanhatrang.com/wp-content/uploads/2023/04/thap-ba-ponagar-5.jpg" alt="Tháp Bà Ponagar" loading="lazy">
+            <p>Nha Trang không chỉ quyến rũ bởi cảnh đẹp mà còn mang trong mình bề dày lịch sử. Từng là một phần của vương quốc Chăm Pa cổ, thành phố vẫn lưu giữ dấu ấn văn hóa tại Tháp Bà Ponagar. Trải qua nhiều giai đoạn phát triển, Nha Trang dần trở thành một trung tâm du lịch và kinh tế quan trọng của miền Trung. Với sự giao thoa giữa truyền thống và hiện đại, nơi đây vừa mang nét cổ kính của nền văn minh Chăm, vừa là đô thị biển sôi động, thu hút du khách khắp nơi!</p>
+        </div>
+        <div class="section" id="tourism">
+            <h2>Du lịch Nha Trang</h2>
+            <p>Du lịch Nha Trang là sự kết hợp hoàn hảo giữa biển xanh, thiên nhiên kỳ vĩ và văn hóa đặc sắc. Từ những bãi biển tuyệt đẹp như vịnh Nha Trang, Hòn Mun, đến các điểm vui chơi sôi động như VinWonders Nha Trang, nơi đây luôn có điều hấp dẫn chờ đón. Du khách có thể khám phá di tích lịch sử tại Tháp Bà Ponagar, thư giãn với tắm bùn khoáng, hay thưởng thức hải sản tươi ngon. Dù tìm kiếm kỳ nghỉ thư giãn hay hành trình khám phá, Nha Trang luôn là điểm đến không thể bỏ lỡ!</p>
+            <img src="https://statics.vinpearl.com/NT8_1716965348.jpg" alt="VinWonders Nha Trang" loading="lazy">
+        </div>
+        <div class="section" id="culture">
+            <h2>Văn hóa Nha Trang</h2>
+            <img src="https://statics.vinwonders.com/le-hoi-thap-ba-ponagar-1_1636860640.jpeg" alt="Văn hóa Nha Trang" loading="lazy">
+            <p>Văn hóa Nha Trang là sự hòa quyện giữa truyền thống miền biển và dấu ấn Chăm Pa cổ. Lễ hội đặc sắc như Lễ hội Tháp Bà Ponagar, Lễ hội Cầu Ngư phản ánh đời sống tâm linh của người dân. Nghệ thuật hát bài chòi, múa bóng Chăm cùng làng nghề nước mắm, yến sào góp phần tạo nên bản sắc riêng. Không chỉ vậy, ẩm thực phong phú và lối sống cởi mở của người dân khiến Nha Trang trở thành điểm đến vừa thân quen, vừa độc đáo!</p>
+        </div>
+        <div class="section full-width" id="destinations">
+            <h2>Điểm đến nổi bật</h2>
+            <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d29382.135184963966!2d109.1604489!3d12.2632022!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3170677811cc886f%3A0x5c4bbc0aa81edcb9!2sNha%20Trang%2C%20Kh%C3%A1nh%20H%C3%B2a%2C%20Vi%E1%BB%87t%20Nam!5e0!3m2!1svi!2s!4v1648567891234" 
+                width="100%" 
+                height="300" 
+                style="border: 3px solid var(--accent-color); border-radius: 15px; margin: 2rem 0;" 
+                allowfullscreen="" 
+                loading="lazy" 
+                referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+            <div class="card-container">
+                <div class="card">
+                    <img src="https://toigingiuvedep.vn/wp-content/uploads/2021/05/hinh-anh-con-duong-ven-bo-bien-nha-trang.jpg" alt="Bãi biển Nha Trang" loading="lazy">
+                    <h3>Bãi biển Nha Trang</h3>
+                    <p>Bãi biển dài 7km với cát trắng mịn và nước trong xanh</p>
+                    <div class="rating">
+                        <span class="star" data-value="1">★</span>
+                        <span class="star" data-value="2">★</span>
+                        <span class="star" data-value="3">★</span>
+                        <span class="star" data-value="4">★</span>
+                        <span class="star" data-value="5">★</span>
+                    </div>
+                    <textarea placeholder="Viết bình luận..." class="comment-box"></textarea>
+                    <button class="submit-comment">Gửi</button>
+                </div>
+                <div class="card">
+                    <img src="https://www.mommytravels.net/wp-content/uploads/2022/12/VinWonders-Nha-Trang.jpg" alt="VinWonders" loading="lazy">
+                    <h3>VinWonders</h3>
+                    <p>Công viên giải trí lớn nhất Nha Trang với nhiều trò chơi</p>
+                    <div class="rating">
+                        <span class="star" data-value="1">★</span>
+                        <span class="star" data-value="2">★</span>
+                        <span class="star" data-value="3">★</span>
+                        <span class="star" data-value="4">★</span>
+                        <span class="star" data-value="5">★</span>
+                    </div>
+                    <textarea placeholder="Viết bình luận..." class="comment-box"></textarea>
+                    <button class="submit-comment">Gửi</button>
+                </div>
+                <div class="card">
+                    <img src="https://vietnamtour.com/images/Vietnam_Attractions/Nha_Trang/Po-Nagar-Cham-Towers_42b65.jpg" alt="Tháp Bà" loading="lazy">
+                    <h3>Tháp Bà Ponagar</h3>
+                    <p>Di tích Chăm Pa cổ kính, nơi diễn ra lễ hội Tháp Bà</p>
+                    <div class="rating">
+                        <span class="star" data-value="1">★</span>
+                        <span class="star" data-value="2">★</span>
+                        <span class="star" data-value="3">★</span>
+                        <span class="star" data-value="4">★</span>
+                        <span class="star" data-value="5">★</span>
+                    </div>
+                    <textarea placeholder="Viết bình luận..." class="comment-box"></textarea>
+                    <button class="submit-comment">Gửi</button>
+                </div>
+            </div>
+        </div>
+        <div class="section full-width" id="cuisine">
+            <h2>Ẩm thực đặc trưng</h2>
+            <p>Ẩm thực Nha Trang là thiên đường hương vị biển cả với những món ngon khó cưỡng. Từ bún chả cá, bún sứa thanh ngọt đến nem nướng Ninh Hòa, mực nướng muối ớt, mỗi món ăn đều đậm đà bản sắc miền biển. Hải sản tươi ngon như tôm hùm Bình Ba, ghẹ hấp, nhum biển khiến thực khách mê mẩn. Đừng quên thưởng thức bánh căn, bánh ướt Diên Khánh, nhâm nhi mực rim me, bánh tráng xoài hay giải nhiệt với sinh tố xoài Cam Ranh. Muốn mang hương vị Nha Trang về nhà? Nước mắm, yến sào, chả cá chính là lựa chọn hoàn hảo!</p>
+            <div class="card-container">
+                <div class="card">
+                    <img src="https://statics.vntrip.vn/data-v2/data-guide/img_content/1462787875_bun-sua-nha-trang-3.jpg" alt="Bún sứa" loading="lazy">
+                    <h3>Bún Sứa</h3>
+                    <p>Món bún nước lèo với sứa giòn sần sật</p>
+                    <div class="rating">
+                        <span class="star" data-value="1">★</span>
+                        <span class="star" data-value="2">★</span>
+                        <span class="star" data-value="3">★</span>
+                        <span class="star" data-value="4">★</span>
+                        <span class="star" data-value="5">★</span>
+                    </div>
+                    <textarea placeholder="Viết bình luận..." class="comment-box"></textarea>
+                    <button class="submit-comment">Gửi</button>
+                </div>
+                <div class="card">
+                    <img src="https://chalui.vn/wp-content/uploads/2021/05/MG_6869-min-2048x1365.jpg" alt="Nem nướng" loading="lazy">
+                    <h3>Nem Nướng Ninh Hòa</h3>
+                    <p>Nem nướng thơm lừng ăn kèm rau sống</p>
+                    <div class="rating">
+                        <span class="star" data-value="1">★</span>
+                        <span class="star" data-value="2">★</span>
+                        <span class="star" data-value="3">★</span>
+                        <span class="star" data-value="4">★</span>
+                        <span class="star" data-value="5">★</span>
+                    </div>
+                    <textarea placeholder="Viết bình luận..." class="comment-box"></textarea>
+                    <button class="submit-comment">Gửi</button>
+                </div>
+            </div>
+        </div>
+        <div class="section full-width" id="places">
+            <h2>Địa điểm du lịch nổi bật</h2>
+            <p>Nha Trang là điểm đến lý tưởng với vô số cảnh đẹp mê hoặc. Hãy khám phá VinWonders Nha Trang – thiên đường giải trí trên đảo Hòn Tre, đắm mình trong làn nước xanh biếc của vịnh Nha Trang, hay lặn ngắm san hô tại Hòn Mun. Đừng bỏ lỡ dấu ấn văn hóa tại Tháp Bà Ponagar, thư giãn với tắm bùn Tháp Bà, và trải nghiệm chợ truyền thống tại Chợ Đầm. Nếu yêu thiên nhiên, hãy đến đảo Bình Ba, đảo Yến để tận hưởng vẻ đẹp hoang sơ. Nha Trang không chỉ có biển xanh, cát trắng mà còn vô vàn điều hấp dẫn chờ bạn khám phá!</p>
+            <div class="filter-container">
+                <button class="filter-btn active" data-filter="all">Tất cả</button>
+                <button class="filter-btn" data-filter="nature">Thiên nhiên</button>
+                <button class="filter-btn" data-filter="beach">Bãi biển</button>
+                <button class="filter-btn" data-filter="entertainment">Giải trí</button>
+            </div>
+            <div class="card-container">
+                <div class="card" data-category="nature">
+                    <img src="https://letsflytravel.vn/wp-content/uploads/2024/04/tour-thac-yang-bay-22.webp" alt="Thác Yang Bay" loading="lazy">
+                    <h3>Thác Yang Bay</h3>
+                    <p>Thác nước tuyệt đẹp nằm giữa thiên nhiên hoang sơ</p>
+                    <div class="rating">
+                        <span class="star" data-value="1">★</span>
+                        <span class="star" data-value="2">★</span>
+                        <span class="star" data-value="3">★</span>
+                        <span class="star" data-value="4">★</span>
+                        <span class="star" data-value="5">★</span>
+                    </div>
+                    <textarea placeholder="Viết bình luận..." class="comment-box"></textarea>
+                    <button class="submit-comment">Gửi</button>
+                </div>
+                <div class="card" data-category="beach">
+                    <img src="https://statics.vinwonders.com/hon-mun-nha-trang-5_1627542031.jpg" alt="Hòn Mun" loading="lazy">
+                    <h3>Hòn Mun</h3>
+                    <p>Điểm đến lý tưởng cho những ai yêu thích lặn biển</p>
+                    <div class="rating">
+                        <span class="star" data-value="1">★</span>
+                        <span class="star" data-value="2">★</span>
+                        <span class="star" data-value="3">★</span>
+                        <span class="star" data-value="4">★</span>
+                        <span class="star" data-value="5">★</span>
+                    </div>
+                    <textarea placeholder="Viết bình luận..." class="comment-box"></textarea>
+                    <button class="submit-comment">Gửi</button>
+                </div>
+                <div class="card" data-category="entertainment">
+                    <img src="https://statics.vinwonders.com/vinpearl-luxury-nha-trang_1680204996.jpg" alt="Vinpearl Land" loading="lazy">
+                    <h3>Vinpearl Land</h3>
+                    <p>Công viên giải trí với nhiều trò chơi hấp dẫn</p>
+                    <div class="rating">
+                        <span class="star" data-value="1">★</span>
+                        <span class="star" data-value="2">★</span>
+                        <span class="star" data-value="3">★</span>
+                        <span class="star" data-value="4">★</span>
+                        <span class="star" data-value="5">★</span>
+                    </div>
+                    <textarea placeholder="Viết bình luận..." class="comment-box"></textarea>
+                    <button class="submit-comment">Gửi</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <p>© 2025 Khám Phá Nha Trang. All Rights Reserved.</p>
+    </footer>
+
+    <div id="imageModal" class="modal">
+        <span class="close">×</span>
+        <img class="modal-content" id="modalImage">
+    </div>
+    <div id="chat-box" class="chat-box">
+        <div class="chat-header">
+            <span>Đỗ Thành Nam 12A2</span>
+            <button id="chat-toggle" class="chat-toggle">−</button>
+        </div>
+        <div class="chat-body">
+            <div class="chat-messages" id="chat-messages">
+                <div class="message bot-message">Xin chào! Tôi có thể giúp gì cho bạn hôm nay?</div>
+            </div>
+            <div class="chat-input">
+                <input type="text" id="chat-input" placeholder="Nhập tin nhắn...">
+                <button id="send-message"><i class="fas fa-paper-plane"></i></button>
+            </div>
+        </div>
+        <button id="chat-icon" class="chat-icon"><i class="fas fa-comment-dots"></i></button>
+    </div>
+    <button id="chat-open-btn" class="chat-open-btn"><i class="fas fa-comment-dots"></i></button>
+
+    <script>
+        window.addEventListener('scroll', () => {
+            const scrollPosition = window.scrollY;
+            const headerImg = document.querySelector('header img');
+            headerImg.style.transform = `translateY(${scrollPosition * 0.4}px) scale(${1 + scrollPosition * 0.0002})`;
+        });
+        const typingText = document.querySelector('.typing');
+        const text = typingText.textContent;
+        typingText.textContent = '';
+        let i = 0;
+        function type() {
+            if (i < text.length) {
+                typingText.textContent += text.charAt(i);
+                i++;
+                setTimeout(type, 100);
+            }
+        }
+        setTimeout(type, 500);
+        const sections = document.querySelectorAll('.section');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                }
+            });
+        }, { threshold: 0.1 });
+        sections.forEach(section => observer.observe(section));
+        window.addEventListener('scroll', () => {
+            const winScroll = window.scrollY;
+            const height = document.documentElement.scrollHeight - window.innerHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('progress-bar').style.width = `${scrolled}%`;
+        });
+        const navLinks = document.querySelectorAll('nav a');
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 100;
+                if (window.scrollY >= sectionTop) current = section.getAttribute('id');
+            });
+            navLinks.forEach(link => {
+                link.classList.toggle('active', link.getAttribute('href').substring(1) === current);
+            });
+        });
+        const tocList = document.getElementById('toc-list');
+        sections.forEach(section => {
+            const id = section.getAttribute('id');
+            const title = section.querySelector('h2').textContent;
+            const li = document.createElement('li');
+            const a = document.createElement('a');
+            a.href = `#${id}`;
+            a.textContent = title;
+            a.addEventListener('click', (e) => {
+                e.preventDefault();
+                document.querySelector(`#${id}`).scrollIntoView({ behavior: 'smooth' });
+            });
+            li.appendChild(a);
+            tocList.appendChild(li);
+        });
+        const tocLinks = document.querySelectorAll('#toc a');
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 100;
+                if (window.scrollY >= sectionTop) current = section.getAttribute('id');
+            });
+            tocLinks.forEach(link => {
+                link.classList.toggle('active', link.getAttribute('href').substring(1) === current);
+            });
+        });
+        const toc = document.getElementById('toc');
+        const tocToggle = document.getElementById('toc-toggle');
+        tocToggle.addEventListener('click', () => {
+            toc.classList.toggle('collapsed');
+            const icon = tocToggle.querySelector('i');
+            if (toc.classList.contains('collapsed')) {
+                icon.classList.remove('fa-chevron-left');
+                icon.classList.add('fa-chevron-right');
+            } else {
+                icon.classList.remove('fa-chevron-right');
+                icon.classList.add('fa-chevron-left');
+            }
+        });
+        const modal = document.getElementById('imageModal');
+        const modalImg = document.getElementById('modalImage');
+        const closeBtn = document.querySelector('.close');
+        const images = document.querySelectorAll('.section img, .card img');
+        images.forEach(img => {
+            img.addEventListener('click', () => {
+                modal.classList.add('active');
+                modalImg.src = img.src;
+            });
+        });
+        closeBtn.addEventListener('click', () => modal.classList.remove('active'));
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) modal.classList.remove('active');
+        });
+        const chatBox = document.getElementById('chat-box');
+        const chatToggle = document.getElementById('chat-toggle');
+        const chatIcon = document.getElementById('chat-icon');
+        const chatOpenBtn = document.getElementById('chat-open-btn');
+        const sendMessageBtn = document.getElementById('send-message');
+        const chatInput = document.getElementById('chat-input');
+        const chatMessages = document.getElementById('chat-messages');
+
+        function openChat() {
+            chatBox.classList.add('active');
+            chatBox.classList.remove('closed');
+            chatOpenBtn.classList.add('hidden');
+            chatIcon.classList.remove('visible');
+        }
+
+        function closeChat() {
+            chatBox.classList.add('closed');
+            chatBox.classList.remove('active');
+            chatOpenBtn.classList.remove('hidden');
+            chatIcon.classList.add('visible');
+        }
+
+        function toggleChat() {
+            if (chatBox.classList.contains('closed')) {
+                openChat();
+            } else {
+                closeChat();
+            }
+        }
+
+        chatOpenBtn.classList.remove('hidden');
+        chatIcon.classList.remove('visible');
+
+        chatOpenBtn.addEventListener('click', openChat);
+        chatToggle.addEventListener('click', toggleChat);
+        chatIcon.addEventListener('click', openChat);
+
+        function sendMessage() {
+            const messageText = chatInput.value.trim();
+            if (!messageText) return;
+
+            const userMessage = document.createElement('div');
+            userMessage.classList.add('message', 'user-message');
+            userMessage.textContent = messageText;
+            chatMessages.appendChild(userMessage);
+
+            setTimeout(() => {
+                const botMessage = document.createElement('div');
+                botMessage.classList.add('message', 'bot-message');
+                botMessage.textContent = 'Cảm ơn bạn đã liên hệ! Chúng tôi sẽ hỗ trợ bạn sớm nhất.';
+                chatMessages.appendChild(botMessage);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }, 1000);
+
+            chatInput.value = '';
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        sendMessageBtn.addEventListener('click', sendMessage);
+        chatInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') sendMessage();
+        });
+        const darkModeToggle = document.querySelector('.dark-mode-toggle');
+        darkModeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            const isDark = document.body.classList.contains('dark-mode');
+            darkModeToggle.innerHTML = isDark ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+            localStorage.setItem('darkMode', isDark);
+        });
+        if (localStorage.getItem('darkMode') === 'true') {
+            document.body.classList.add('dark-mode');
+            darkModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+        }
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const cards = document.querySelectorAll('.card');
+        filterButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterButtons.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                const filter = btn.getAttribute('data-filter');
+                cards.forEach(card => {
+                    const category = card.getAttribute('data-category');
+                    card.style.display = (filter === 'all' || category === filter) ? 'block' : 'none';
+                });
+            });
+        });
+        cards.forEach(card => {
+            const stars = card.querySelectorAll('.star');
+            stars.forEach(star => {
+                star.addEventListener('click', () => {
+                    const value = star.getAttribute('data-value');
+                    stars.forEach(s => s.classList.toggle('active', s.getAttribute('data-value') <= value));
+                });
+            });
+            const submitBtn = card.querySelector('.submit-comment');
+            submitBtn.addEventListener('click', () => {
+                const comment = card.querySelector('.comment-box').value;
+                if (comment) alert(`Bình luận: ${comment}`);
+            });
+        });
+    </script>
+</body>
+</html>
