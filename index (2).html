@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Khám Phá Nha Trang - Thiên đường Biển Gọi</title>
+    <meta name="description" content="Cẩm nang du lịch Nha Trang toàn diện: khám phá vẻ đẹp quyến rũ từ bãi biển, hòn đảo, di tích Chăm Pa đến ẩm thực đặc sắc, hoạt động vui chơi và kinh nghiệm hữu ích.">
+    <link rel="icon" href="favicon.ico" type="image/x-icon"> <!-- Thêm favicon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="khamphanhatrang.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body class="no-js"> <!-- Add no-js class for JS detection -->
+    <div id="progress-bar"></div>
+
+    <header id="home">
+        <div class="header-background">
+             <img src="images/header-nha-trang-beach.jpg" alt="Bãi biển Nha Trang xanh biếc nhìn từ trên cao">
+        </div>
+        <div class="header-overlay"></div>
+        <div class="header-content">
+             <h1><span class="typing">Khám Phá Nha Trang</span></h1>
+             <p class="tagline">Viên ngọc bừng sáng giữa biển trời, nơi thiên nhiên kỳ vĩ và văn hóa độc đáo hội tụ.</p>
+             <a href="#why" class="cta header-cta"><span>Bắt đầu Hành trình</span> <i class="fas fa-arrow-right"></i></a>
+        </div>
+        <a href="#why" class="scroll-down" aria-label="Cuộn xuống">
+            <div class="scroll-arrow"></div>
+            <div class="scroll-arrow"></div>
+            <div class="scroll-arrow"></div>
+        </a>
+        <div class="wave-container">
+            <div class="wave wave1"></div>
+            <div class="wave wave2"></div>
+            <div class="wave wave3"></div>
+        </div>
+    </header>
+
+    <nav>
+        <div class="nav-container">
+            <a href="#why">Vì sao chọn?</a>
+            <a href="#planning">Lên Kế hoạch</a>
+            <a href="#destinations">Điểm đến</a>
+            <a href="#activities">Trải nghiệm</a>
+            <a href="#culture">Văn hóa</a>
+            <a href="#cuisine">Ẩm thực</a>
+            <a href="#tips">Mẹo Hay</a>
+            <button class="dark-mode-toggle" aria-label="Chuyển chế độ tối">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+    </nav>
+
+    <div id="toc">
+        <h3><i class="fas fa-compass"></i> Cẩm Nang</h3>
+        <ul id="toc-list"></ul>
+        <button id="toc-toggle" aria-label="Đóng mục lục" aria-expanded="true">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+    </div>
+
+    <main class="container">
+
+        <!-- 1. Why Nha Trang? -->
+        <section class="section introductory-section" id="why">
+             <div class="section-icon"><i class="fas fa-heart"></i></div>
+             <div class="section-content">
+                 <h2>Vì Sao Chọn Nha Trang?</h2>
+                 <p>Nha Trang không chỉ là một điểm đến, đó là một trải nghiệm đánh thức mọi giác quan. Thành phố này quyến rũ du khách bởi:</p>
+                 <ul>
+                     <li><i class="fas fa-umbrella-beach"></i> <strong>Biển xanh cát trắng:</strong> Vịnh Nha Trang, một trong những vịnh đẹp nhất thế giới, cùng vô số bãi tắm hoang sơ và quyến rũ.</li>
+                     <li><i class="fas fa-water"></i> <strong>Đảo ngọc huyền bí:</strong> Khám phá thế giới đại dương rực rỡ tại Hòn Mun, thư giãn tại Hòn Tằm, hay tìm về thiên nhiên tại Đảo Yến.</li>
+                     <li><i class="fas fa-landmark"></i> <strong>Di sản văn hóa:</strong> Dấu ấn Chăm Pa cổ kính tại Tháp Bà Ponagar và những lễ hội truyền thống đặc sắc.</li>
+                     <li><i class="fas fa-utensils"></i> <strong>Ẩm thực phong phú:</strong> Thiên đường hải sản tươi ngon và các món đặc sản địa phương không thể bỏ lỡ.</li>
+                     <li><i class="fas fa-hiking"></i> <strong>Hoạt động đa dạng:</strong> Từ lặn biển, tắm bùn khoáng, đến vui chơi giải trí và khám phá thiên nhiên.</li>
+                 </ul>
+                 <a href="#planning" class="cta"><span>Lên kế hoạch ngay!</span></a>
+             </div>
+             <div class="section-image reveal-right">
+                <img src="images/why-nha-trang-panorama.jpg" alt="Toàn cảnh Vịnh Nha Trang" loading="lazy">
+             </div>
+        </section>
+
+        <!-- 2. Planning Your Trip -->
+        <section class="section full-width" id="planning">
+            <h2><i class="fas fa-map-marked-alt"></i> Lên Kế Hoạch Cho Chuyến Đi</h2>
+            <p class="section-subtitle">Thông tin cần thiết để chuẩn bị cho hành trình khám phá Nha Trang hoàn hảo</p>
+            <div class="planning-grid">
+                <div class="planning-item reveal-bottom">
+                    <div class="planning-icon"><i class="fas fa-calendar-alt"></i></div>
+                    <h3>Thời điểm lý tưởng</h3>
+                    <p>Nha Trang đẹp nhất từ tháng 1 đến tháng 8, thời tiết khô ráo, nắng đẹp, biển êm, thích hợp cho mọi hoạt động biển đảo. Tháng 9-12 là mùa mưa, nhưng vẫn có những ngày nắng đẹp và giá dịch vụ thường tốt hơn.</p>
+                </div>
+                <div class="planning-item reveal-bottom" style="animation-delay: 0.1s;">
+                    <div class="planning-icon"><i class="fas fa-plane-arrival"></i></div>
+                    <h3>Di chuyển đến Nha Trang</h3>
+                    <p><strong>Máy bay:</strong> Sân bay Cam Ranh (CXR) cách trung tâm Nha Trang khoảng 35km, có nhiều chuyến bay nội địa và quốc tế. Xe buýt, taxi, xe đưa đón sân bay đều có sẵn.</p>
+                    <p><strong>Tàu hỏa:</strong> Ga Nha Trang nằm ngay trung tâm thành phố, thuận tiện di chuyển.</p>
+                    <p><strong>Xe khách:</strong> Nhiều hãng xe chất lượng cao chạy tuyến Bắc-Nam dừng tại bến xe Nha Trang.</p>
+                </div>
+                <div class="planning-item reveal-bottom" style="animation-delay: 0.2s;">
+                    <div class="planning-icon"><i class="fas fa-motorcycle"></i></div>
+                    <h3>Di chuyển tại Nha Trang</h3>
+                    <p>Thuê xe máy là lựa chọn phổ biến và linh hoạt nhất. Taxi, Grab hoạt động rộng rãi. Xe buýt công cộng cũng là phương án tiết kiệm. Thuê ô tô tự lái hoặc có tài xế phù hợp cho nhóm đông hoặc đi xa.</p>
+                </div>
+                 <div class="planning-item reveal-bottom" style="animation-delay: 0.3s;">
+                    <div class="planning-icon"><i class="fas fa-bed"></i></div>
+                    <h3>Lưu trú</h3>
+                    <p>Nha Trang có đa dạng lựa chọn: từ resort sang trọng ven biển, khách sạn trung tâm tiện nghi, đến homestay ấm cúng và nhà nghỉ bình dân. Khu vực đường Trần Phú, Hòn Tre (Vinpearl) và các khu vực lân cận trung tâm là những nơi tập trung nhiều khách sạn.</p>
+                </div>
+                 <div class="planning-item itinerary-item reveal-bottom" style="animation-delay: 0.4s;">
+                     <div class="planning-icon"><i class="fas fa-route"></i></div>
+                     <h3>Gợi ý lịch trình</h3>
+                     <p><strong>3 Ngày 2 Đêm:</strong> Khám phá trung tâm (Tháp Bà, Chùa Long Sơn), vui chơi VinWonders, tắm biển Trần Phú/Hòn Chồng.</p>
+                     <p><strong>4 Ngày 3 Đêm:</strong> Thêm tour 3 đảo (Hòn Mun, Làng Chài, Hòn Tằm), thưởng thức ẩm thực địa phương.</p>
+                     <p><strong>5+ Ngày:</strong> Khám phá thêm Bãi Dài, Dốc Lết, Thác Yang Bay, hoặc thư giãn tại các resort.</p>
+                 </div>
+            </div>
+        </section>
+
+        <!-- 3. Destinations -->
+        <section class="section full-width" id="destinations">
+            <h2><i class="fas fa-binoculars"></i> Những Điểm Đến Không Thể Bỏ Lỡ</h2>
+            <p class="section-subtitle">Khám phá các địa danh nổi tiếng và những hòn đảo quyến rũ</p>
+            <div class="map-container reveal-bottom">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d124709.9949962895!2d109.1192500599744!3d12.247033438977768!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1zTmhhIFRyYW5nIGF0dHJhY3Rpb25z!5e0!3m2!1svi!2s!4v1716999428141!5m2!1svi!2s"
+                    width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+            <div class="card-container destinations-container reveal-bottom">
+                 <div class="card interactive-card place-card" data-category="island">
+                    <div class="card-image-wrapper"><img src="images/dest-hon-mun.jpg" alt="Lặn biển Hòn Mun" loading="lazy"></div>
+                    <div class="card-content">
+                        <h3>Hòn Mun</h3>
+                        <p>Khu bảo tồn biển quốc gia, thiên đường lặn ngắm san hô với hệ sinh thái đa dạng bậc nhất.</p>
+                        <div class="rating"> <span class="star" data-value="5"><i class="fas fa-star"></i></span> <span class="star" data-value="4"><i class="fas fa-star"></i></span> <span class="star" data-value="3"><i class="fas fa-star"></i></span> <span class="star" data-value="2"><i class="fas fa-star"></i></span> <span class="star" data-value="1"><i class="fas fa-star"></i></span> </div>
+                        <textarea placeholder="Cảm nhận về Hòn Mun..." class="comment-box"></textarea> <button class="submit-comment cta cta-small">Gửi</button>
+                    </div>
+                </div>
+                 <div class="card interactive-card place-card" data-category="entertainment">
+                    <div class="card-image-wrapper"><img src="images/dest-vinwonders.jpg" alt="VinWonders Nha Trang" loading="lazy"></div>
+                    <div class="card-content">
+                        <h3>VinWonders Nha Trang</h3>
+                        <p>Công viên giải trí đẳng cấp trên đảo Hòn Tre với vô vàn trò chơi và show diễn hấp dẫn.</p>
+                         <div class="rating"> <span class="star" data-value="5"><i class="fas fa-star"></i></span> <span class="star" data-value="4"><i class="fas fa-star"></i></span> <span class="star" data-value="3"><i class="fas fa-star"></i></span> <span class="star" data-value="2"><i class="fas fa-star"></i></span> <span class="star" data-value="1"><i class="fas fa-star"></i></span> </div>
+                        <textarea placeholder="Đánh giá VinWonders..." class="comment-box"></textarea> <button class="submit-comment cta cta-small">Gửi</button>
+                    </div>
+                </div>
+                <div class="card interactive-card place-card" data-category="landmark">
+                    <div class="card-image-wrapper"><img src="images/dest-thap-ba.jpg" alt="Tháp Bà Ponagar" loading="lazy"></div>
+                    <div class="card-content">
+                        <h3>Tháp Bà Ponagar</h3>
+                        <p>Quần thể kiến trúc Chăm Pa cổ độc đáo, linh thiêng, nơi diễn ra lễ hội đặc sắc.</p>
+                         <div class="rating"> <span class="star" data-value="5"><i class="fas fa-star"></i></span> <span class="star" data-value="4"><i class="fas fa-star"></i></span> <span class="star" data-value="3"><i class="fas fa-star"></i></span> <span class="star" data-value="2"><i class="fas fa-star"></i></span> <span class="star" data-value="1"><i class="fas fa-star"></i></span> </div>
+                        <textarea placeholder="Cảm nhận Tháp Bà..." class="comment-box"></textarea> <button class="submit-comment cta cta-small">Gửi</button>
+                    </div>
+                </div>
+                 <div class="card interactive-card place-card" data-category="beach">
+                    <div class="card-image-wrapper"><img src="images/dest-bai-dai.jpg" alt="Bãi Dài Cam Ranh" loading="lazy"></div>
+                    <div class="card-content">
+                        <h3>Bãi Dài</h3>
+                        <p>Bãi biển hoang sơ, cát mịn, nước trong xanh, nơi tập trung nhiều resort cao cấp.</p>
+                         <div class="rating"> <span class="star" data-value="5"><i class="fas fa-star"></i></span> <span class="star" data-value="4"><i class="fas fa-star"></i></span> <span class="star" data-value="3"><i class="fas fa-star"></i></span> <span class="star" data-value="2"><i class="fas fa-star"></i></span> <span class="star" data-value="1"><i class="fas fa-star"></i></span> </div>
+                        <textarea placeholder="Đánh giá Bãi Dài..." class="comment-box"></textarea> <button class="submit-comment cta cta-small">Gửi</button>
+                    </div>
+                </div>
+                 <div class="card interactive-card place-card" data-category="landmark">
+                     <div class="card-image-wrapper"><img src="images/dest-chua-long-son.jpg" alt="Chùa Long Sơn và Tượng Phật trắng" loading="lazy"></div>
+                     <div class="card-content">
+                         <h3>Chùa Long Sơn</h3>
+                         <p>Ngôi chùa cổ linh thiêng với tượng Kim Thân Phật Tổ trắng uy nghi trên đỉnh đồi.</p>
+                         <div class="rating"> <span class="star" data-value="5"><i class="fas fa-star"></i></span> <span class="star" data-value="4"><i class="fas fa-star"></i></span> <span class="star" data-value="3"><i class="fas fa-star"></i></span> <span class="star" data-value="2"><i class="fas fa-star"></i></span> <span class="star" data-value="1"><i class="fas fa-star"></i></span> </div>
+                         <textarea placeholder="Cảm nhận chùa Long Sơn..." class="comment-box"></textarea> <button class="submit-comment cta cta-small">Gửi</button>
+                     </div>
+                 </div>
+                  <div class="card interactive-card place-card" data-category="island">
+                     <div class="card-image-wrapper"><img src="images/dest-dao-yen.jpg" alt="Đảo Yến Hòn Nội" loading="lazy"></div>
+                     <div class="card-content">
+                         <h3>Đảo Yến - Hòn Nội</h3>
+                         <p>Khám phá bãi tắm đôi độc đáo và tìm hiểu về nghề khai thác yến sào truyền thống (tham quan theo tour).</p>
+                         <div class="rating"> <span class="star" data-value="5"><i class="fas fa-star"></i></span> <span class="star" data-value="4"><i class="fas fa-star"></i></span> <span class="star" data-value="3"><i class="fas fa-star"></i></span> <span class="star" data-value="2"><i class="fas fa-star"></i></span> <span class="star" data-value="1"><i class="fas fa-star"></i></span> </div>
+                         <textarea placeholder="Đánh giá Đảo Yến..." class="comment-box"></textarea> <button class="submit-comment cta cta-small">Gửi</button>
+                     </div>
+                 </div>
+            </div>
+        </section>
+
+         <!-- 4. Activities -->
+        <section class="section layout-image-left" id="activities">
+            <div class="section-image reveal-left">
+                 <img src="images/activities-diving.jpg" alt="Lặn biển khám phá san hô" loading="lazy">
+            </div>
+            <div class="section-content">
+                <h2><i class="fas fa-swimmer"></i> Trải Nghiệm Đa Dạng</h2>
+                <p>Nha Trang mang đến vô vàn hoạt động thú vị cho mọi du khách:</p>
+                 <ul class="activities-list">
+                     <li><i class="fas fa-water"></i> <strong>Lặn biển & Snorkeling:</strong> Khám phá thế giới dưới nước đầy màu sắc tại Hòn Mun, Hòn Một.</li>
+                     <li><i class="fas fa-hot-tub"></i> <strong>Tắm bùn khoáng nóng:</strong> Thư giãn và phục hồi sức khỏe tại các trung tâm tắm bùn nổi tiếng (Tháp Bà, I-Resort).</li>
+                     <li><i class="fas fa-shopping-cart"></i> <strong>Tham quan & Mua sắm:</strong> Khám phá Chợ Đầm nhộn nhịp, mua đặc sản yến sào, hải sản khô.</li>
+                     <li><i class="fas fa-glass-cheers"></i> <strong>Cuộc sống về đêm:</strong> Thưởng thức cocktail tại các sky bar, quán bar ven biển sôi động.</li>
+                     <li><i class="fas fa-ship"></i> <strong>Du thuyền trên vịnh:</strong> Ngắm hoàng hôn lãng mạn hoặc tham gia các tour du thuyền khám phá đảo.</li>
+                      <li><i class="fas fa-hiking"></i> <strong>Khám phá thiên nhiên:</strong> Trekking đến Thác Yang Bay, Suối Ba Hồ hùng vĩ.</li>
+                 </ul>
+            </div>
+        </section>
+
+        <!-- 5. Culture -->
+        <section class="section layout-image-right" id="culture">
+            <div class="section-content">
+                <h2><i class="fas fa-gopuram"></i> Đậm Đà Bản Sắc Văn Hóa</h2>
+                <p>Nền văn hóa Nha Trang là sự giao thoa đặc sắc giữa văn hóa Chăm Pa cổ xưa và đời sống của cư dân miền biển. Dấu ấn Chăm Pa thể hiện rõ nét nhất qua quần thể Tháp Bà Ponagar, nơi diễn ra Lễ hội Tháp Bà vào tháng 3 Âm lịch hàng năm, thu hút đông đảo người dân và du khách tham gia.</p>
+                <p>Bên cạnh đó, Lễ hội Cầu Ngư với các nghi lễ truyền thống cầu mong biển lặng, tôm cá đầy khoang là một phần không thể thiếu trong đời sống tinh thần của ngư dân. Các làng nghề truyền thống như làm nước mắm, khai thác yến sào cũng góp phần tạo nên nét độc đáo cho văn hóa địa phương.</p>
+            </div>
+             <div class="section-image reveal-right">
+                 <img src="images/culture-festival.jpg" alt="Lễ hội Cầu Ngư Nha Trang" loading="lazy">
+            </div>
+        </section>
+
+        <!-- 6. Cuisine -->
+        <section class="section full-width" id="cuisine">
+            <h2><i class="fas fa-utensils"></i> Thiên Đường Ẩm Thực</h2>
+            <p class="section-subtitle">Thưởng thức hương vị biển cả và những món ngon đặc sản khó quên</p>
+            <p>Không chỉ có cảnh đẹp, Nha Trang còn làm say lòng du khách bởi nền ẩm thực phong phú và độc đáo. Hải sản tươi ngon là điểm nhấn không thể bỏ qua, với đủ loại tôm, cua, cá, mực, ghẹ, ốc... được chế biến thành vô vàn món hấp dẫn tại các quán ăn ven biển hay nhà hàng sang trọng.</p>
+             <p>Đừng quên khám phá những món ăn đường phố và đặc sản địa phương:</p>
+            <div class="card-container cuisine-container reveal-bottom">
+                <div class="card food-card">
+                    <div class="card-image-wrapper"><img src="images/cuisine-bun-cha-ca.jpg" alt="Bún chả cá Nha Trang" loading="lazy"></div>
+                     <div class="card-content"><h3>Bún Chả Cá & Bún Sứa</h3><p>Nước dùng thanh ngọt từ xương cá, chả cá dai ngon, sứa giòn sần sật.</p></div>
+                </div>
+                <div class="card food-card">
+                     <div class="card-image-wrapper"><img src="images/cuisine-nem-nuong.jpg" alt="Nem nướng Ninh Hòa" loading="lazy"></div>
+                     <div class="card-content"><h3>Nem Nướng Ninh Hòa</h3><p>Nem nướng thơm lừng, cuốn bánh tráng với rau sống, chấm nước sốt đặc biệt.</p></div>
+                </div>
+                 <div class="card food-card">
+                     <div class="card-image-wrapper"><img src="images/cuisine-banh-can.jpg" alt="Bánh căn hải sản" loading="lazy"></div>
+                      <div class="card-content"><h3>Bánh Căn</h3><p>Bánh gạo giòn rụm đổ khuôn, nhân hải sản hoặc trứng, chấm mắm nêm hoặc nước mắm chua ngọt.</p></div>
+                 </div>
+                 <div class="card food-card">
+                    <div class="card-image-wrapper"><img src="images/cuisine-hai-san.jpg" alt="Hải sản nướng" loading="lazy"></div>
+                     <div class="card-content"><h3>Hải Sản Tươi Sống</h3><p>Thưởng thức tôm hùm, ghẹ, mực, ốc... được chế biến theo yêu cầu (hấp, nướng, lẩu).</p></div>
+                </div>
+                 <div class="card food-card">
+                     <div class="card-image-wrapper"><img src="images/cuisine-banh-xeo.jpg" alt="Bánh xèo mực Nha Trang" loading="lazy"></div>
+                     <div class="card-content"><h3>Bánh Xèo Mực</h3><p>Vỏ bánh giòn tan, nhân mực tươi ngon, ăn kèm rau sống và nước chấm đậm đà.</p></div>
+                </div>
+                  <div class="card food-card">
+                     <div class="card-image-wrapper"><img src="images/cuisine-goi-ca-mai.jpg" alt="Gỏi cá mai" loading="lazy"></div>
+                      <div class="card-content"><h3>Gỏi Cá Mai</h3><p>Món gỏi độc đáo từ cá mai tươi, trộn thính, rau thơm, cuốn bánh tráng.</p></div>
+                 </div>
+            </div>
+        </section>
+
+        <!-- 7. Practical Tips -->
+         <section class="section full-width" id="tips">
+             <h2><i class="fas fa-lightbulb"></i> Mẹo Hay Cho Du Khách</h2>
+             <p class="section-subtitle">Những kinh nghiệm hữu ích cho chuyến đi Nha Trang thêm trọn vẹn</p>
+             <div class="tips-grid">
+                 <div class="tip-item reveal-bottom">
+                     <div class="tip-icon"><i class="fas fa-sun"></i></div>
+                     <h4>Chuẩn bị hành lý</h4>
+                     <p>Mang theo đồ bơi, kem chống nắng, mũ rộng vành, kính râm. Trang phục gọn nhẹ, thoáng mát. Đừng quên máy ảnh để lưu giữ khoảnh khắc!</p>
+                 </div>
+                 <div class="tip-item reveal-bottom" style="animation-delay: 0.1s;">
+                      <div class="tip-icon"><i class="fas fa-shield-alt"></i></div>
+                      <h4>An toàn</h4>
+                      <p>Bảo quản tư trang cẩn thận nơi đông người. Chú ý an toàn khi tắm biển, tuân thủ cảnh báo. Sử dụng các dịch vụ du lịch uy tín.</p>
+                 </div>
+                  <div class="tip-item reveal-bottom" style="animation-delay: 0.2s;">
+                      <div class="tip-icon"><i class="fas fa-money-bill-wave"></i></div>
+                      <h4>Chi tiêu & Mua sắm</h4>
+                      <p>Hỏi giá trước khi sử dụng dịch vụ hoặc mua hàng, đặc biệt là hải sản. Có thể trả giá nhẹ tại các khu chợ. Mang theo tiền mặt và thẻ ATM/tín dụng.</p>
+                 </div>
+                 <div class="tip-item reveal-bottom" style="animation-delay: 0.3s;">
+                      <div class="tip-icon"><i class="fas fa-map-signs"></i></div>
+                      <h4>Giao thông</h4>
+                      <p>Nắm rõ luật giao thông nếu thuê xe máy. Sử dụng ứng dụng gọi xe đáng tin cậy. Hỏi đường người dân địa phương nếu cần, họ rất thân thiện.</p>
+                 </div>
+                 <div class="tip-item reveal-bottom" style="animation-delay: 0.4s;">
+                     <div class="tip-icon"><i class="fas fa-phone-alt"></i></div>
+                     <h4>Liên lạc khẩn cấp</h4>
+                     <p>Lưu số điện thoại của cảnh sát (113), cứu thương (115), cứu hỏa (114) và số điện thoại của khách sạn/người thân.</p>
+                 </div>
+                  <div class="tip-item reveal-bottom" style="animation-delay: 0.5s;">
+                     <div class="tip-icon"><i class="fas fa-info-circle"></i></div>
+                     <h4>Thông tin khác</h4>
+                     <p>Đổi tiền Việt Nam Đồng (VND) nếu bạn là du khách quốc tế. Học một vài câu giao tiếp tiếng Việt cơ bản sẽ rất hữu ích.</p>
+                 </div>
+             </div>
+         </section>
+
+         <!-- 8. Gallery (Optional but recommended) -->
+         <section class="section full-width" id="gallery">
+             <h2><i class="fas fa-images"></i> Khoảnh Khắc Nha Trang</h2>
+             <p class="section-subtitle">Ngắm nhìn vẻ đẹp đa dạng của thành phố biển qua những hình ảnh ấn tượng</p>
+             <div class="gallery-grid reveal-bottom">
+                 <div class="gallery-item"><img src="images/gallery-1.jpg" alt="Ảnh đẹp Nha Trang 1" loading="lazy"></div>
+                 <div class="gallery-item"><img src="images/gallery-2.jpg" alt="Ảnh đẹp Nha Trang 2" loading="lazy"></div>
+                 <div class="gallery-item"><img src="images/gallery-3.jpg" alt="Ảnh đẹp Nha Trang 3" loading="lazy"></div>
+                 <div class="gallery-item"><img src="images/gallery-4.jpg" alt="Ảnh đẹp Nha Trang 4" loading="lazy"></div>
+                 <div class="gallery-item"><img src="images/gallery-5.jpg" alt="Ảnh đẹp Nha Trang 5" loading="lazy"></div>
+                 <div class="gallery-item"><img src="images/gallery-6.jpg" alt="Ảnh đẹp Nha Trang 6" loading="lazy"></div>
+                 </div>
+         </section>
+
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p>© <span id="current-year"></span> Khám Phá Nha Trang - Thực hiện bởi Đỗ Thành Nam 12A2.</p>
+            <p>Mọi thông tin và hình ảnh trên trang chỉ mang tính chất tham khảo và giới thiệu du lịch Nha Trang.</p>
+            <div class="social-links">
+                <a href="#" aria-label="Facebook" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="Youtube" target="_blank" rel="noopener noreferrer"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Image Modal -->
+    <div id="imageModal" class="modal">
+        <span class="close" aria-label="Đóng ảnh">×</span>
+        <img class="modal-content" id="modalImage" alt="Hình ảnh phóng to">
+    </div>
+
+    <!-- Chat Box -->
+    <div id="chat-box" class="chat-box">
+        <div class="chat-header">
+            <span><i class="fas fa-headset"></i> Hỗ trợ trực tuyến</span>
+            <button id="chat-toggle" class="chat-toggle" aria-label="Đóng chat">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="chat-body">
+            <div class="chat-messages" id="chat-messages" aria-live="polite">
+                <div class="message bot-message">Xin chào! Tôi là trợ lý ảo, tôi có thể giúp gì cho bạn về chuyến đi Nha Trang?</div>
+            </div>
+             <div class="chat-typing-indicator" id="chat-typing">
+                 <span></span><span></span><span></span>
+             </div>
+            <div class="chat-input">
+                <input type="text" id="chat-input" placeholder="Nhập câu hỏi của bạn..." aria-label="Nhập tin nhắn chat">
+                <button id="send-message" aria-label="Gửi tin nhắn">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chat Open Button -->
+    <button id="chat-open-btn" class="chat-open-btn" aria-label="Mở cửa sổ Chat">
+        <i class="fas fa-comment-dots"></i>
+        <span class="chat-notification-dot"></span>
+    </button>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="back-to-top" aria-label="Cuộn lên đầu trang">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script src="khamphanhatrang.js"></script>
+</body>
+</html>
